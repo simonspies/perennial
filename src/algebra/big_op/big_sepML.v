@@ -596,7 +596,7 @@ Section maplist2.
   Implicit Types mw : gmap K W.
   Implicit Types l : list LV.
 
-  Context `{BiAffine PROP}.
+  Context `{!BiAffine PROP}.
 
   Theorem big_sepML_map_val_exists_helper Φ mv l (R : K -> V -> W -> Prop) :
     big_sepML Φ mv l -∗
@@ -618,8 +618,8 @@ Section maplist2.
       iDestruct "HR" as "#HR".
       iSpecialize ("Hi" with "Hml [HR]").
       { iModIntro.
-        iIntros. iApply "HR"; last by iFrame.
-        apply lookup_delete_Some in H1; intuition eauto. }
+        iIntros (k' v' lv Hdel) "?". iApply "HR"; last by iFrame.
+        apply lookup_delete_Some in Hdel; intuition eauto. }
       iDestruct "Hi" as (mw) "[%Hdel Hi]".
       iDestruct ("HR" with "[] Hk") as (w) "%HR"; eauto.
       iExists (<[k := w]> mw).

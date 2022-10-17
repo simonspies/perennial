@@ -837,7 +837,7 @@ Proof.
 Qed.
 
 Theorem big_sepL_offset {b:bi} f off n :
-  big_opL (@bi_sep b) (fun i x => f i x) (seq off n) ≡
+  big_opL (@bi_sep _ b) (fun i x => f i x) (seq off n) ≡
   big_opL bi_sep (fun i x => f i (x + off)%nat) (seq 0%nat n).
 Proof.
   apply (big_opL_add _ _ _ 0%nat _ 0%nat _ _).

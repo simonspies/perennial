@@ -52,7 +52,9 @@ Global Instance pri_inv_contractive E : Contractive (pri_inv E).
 Proof.
   rewrite pri_inv_eq /pri_inv_def => n ?? Hequiv.
   do 4 (f_contractive || f_equiv).
-  simpl. destruct n => //=.
+  simpl. split; intros k Hk.
+  destruct Hequiv as [Hequiv].
+  specialize (Hequiv k Hk).
   rewrite //= in Hequiv.
   apply vector.vcons_ne; auto.
   econstructor.

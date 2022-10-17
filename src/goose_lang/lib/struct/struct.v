@@ -34,7 +34,7 @@ Qed.
 
 Theorem inv_readonly_acc {Σ} `{invGS Σ}
         (P: Qp -> iProp Σ)
-        `{fractional.Fractional _ P} {Htimeless: forall q, Timeless (P q)}
+        `{!fractional.Fractional P} {Htimeless: forall q, Timeless (P q)}
         N E :
   ↑N ⊆ E →
   ⊢ inv N (∃ q, P q) ={E}=∗ ∃ q, P q.

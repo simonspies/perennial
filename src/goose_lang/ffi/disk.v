@@ -308,7 +308,7 @@ lemmas. *)
       econstructor; [ eapply relation.suchThat_gen0; reflexivity | ].
       monad_simpl. }
     iNext; iIntros (v2 σ2 g2 efs Hstep).
-    apply head_step_atomic_inv in Hstep; [ | by inversion 1 ]. 
+    apply head_step_atomic_inv in Hstep; [ | by inversion 1 ].
     inv_head_step.
     monad_inv.
     iMod (global_state_interp_le with "Hg") as "$".
@@ -533,7 +533,7 @@ lemmas. *)
       rewrite big_sepL_app.
       rewrite replicate_length big_sepL_cons big_sepL_nil.
       rewrite big_sepM_insert.
-      * rewrite comm. apply bi.sep_mono; auto. by rewrite ?right_id Z.add_0_l.
+      * rewrite comm. apply bi.sep_mono; auto. by rewrite Nat.add_0_r Z.add_0_l right_id.
       * by apply init_disk_sz_lookup_ge.
   Qed.
 

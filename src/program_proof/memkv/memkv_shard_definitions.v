@@ -122,11 +122,11 @@ Proof.
   f_equiv. rewrite /handler_urpc_spec /handler_spec. (* FIXME unfolding other abstractions *)
   do 9 f_equiv.
   apply saved_spec.saved_spec_own_contractive.
-  rewrite /dist_later. destruct n; auto.
-  intros => ?.
+  split; intros k Hk ?.
   rewrite /uRPCSpec_Spec /is_shard_server_moveSpec_pre /=.
   intros Φ. simpl.
   repeat f_equiv.
+  destruct Hpre as [Hpre]. by eapply Hpre.
 Qed.
 
 Definition is_shard_server_def :=

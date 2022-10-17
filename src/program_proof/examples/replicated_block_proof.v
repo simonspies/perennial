@@ -250,7 +250,7 @@ Section goose.
     iApply "HQ"; iFrame.
   Qed.
 
-  Theorem wpc_RepBlock__Read_triple (Q: Block → iProp Σ) (Qc: iProp Σ) `{Timeless _ Qc} {l} addr (primary: bool) :
+  Theorem wpc_RepBlock__Read_triple (Q: Block → iProp Σ) (Qc: iProp Σ) `{!Timeless Qc} {l} addr (primary: bool) :
     {{{ "Hrb" ∷ is_rblock l addr ∗ (* replicated block protocol *)
         "HQc" ∷ (∀ σ, Q σ -∗ Qc) ∗ (* crash condition after "linearization point" *)
         "Hfupd" ∷ (Qc (* crash condition before "linearization point" *) ∧
@@ -363,7 +363,7 @@ Section goose.
     iApply "HΦ"; iFrame.
   Qed.
 
-  Theorem wpc_RepBlock__Write_triple (Q: iProp Σ) (Qc: iProp Σ) `{Timeless _ Qc} l addr (s: Slice.t) q (b: Block) :
+  Theorem wpc_RepBlock__Write_triple (Q: iProp Σ) (Qc: iProp Σ) `{!Timeless Qc} l addr (s: Slice.t) q (b: Block) :
     {{{ "Hrb" ∷ is_rblock l addr ∗
         "Hb" ∷ is_block s q b ∗
         "HQc" ∷ (Q -∗ Qc) ∗

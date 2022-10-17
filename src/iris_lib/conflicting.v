@@ -1,4 +1,5 @@
 From iris.proofmode Require Import tactics.
+From iris.algebra Require Import finite_stepindex.
 
 Set Default Proof Using "Type".
 

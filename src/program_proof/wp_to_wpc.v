@@ -88,7 +88,7 @@ Proof.
   do 2 (rewrite ?bi_schema_interp_unfold /= //=).
 Qed.
 
-Lemma wpc_spec P Φ Φc `{HT: Timeless _ Φc} γ :
+Lemma wpc_spec P Φ Φc `{HT: !Timeless Φc} γ :
   is_foo1 N1 P γ ∗
   (<disc> Φc ∧ (∀ σ, ▷ P σ -∗ |NC={⊤ ∖ ↑ N}=> ▷ P (transition σ) ∗ (<disc> Φc ∧ Φ (#())))) -∗
   WPC e @ ⊤ {{ Φ }} {{ Φc }}.

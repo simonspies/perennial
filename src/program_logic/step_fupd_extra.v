@@ -99,7 +99,7 @@ Proof.
   iModIntro. iIntros "H". by iMod "H".
 Qed.
 
-Lemma step_fupdN_inner_plain `{BP: BiPlainly PROP} `{@BiFUpdPlainly PROP H BP}
+Lemma step_fupdN_inner_plain `{BP: !BiPlainly PROP} `{!BiFUpdPlainly PROP}
       (k: nat) (P: PROP) :
   Plain P →
   ⊢ (|={⊤, ∅}=> |={∅}▷=>^k |={∅}=> P) -∗
@@ -238,7 +238,7 @@ Proof.
   - intros ? P Q ->. eauto.
 Qed.
 
-Lemma step_fupdN_inner_plain' `{BP: BiPlainly PROP} `{@BiFUpdPlainly PROP H BP}
+Lemma step_fupdN_inner_plain' `{BP: !BiPlainly PROP} `{!BiFUpdPlainly PROP}
       (k: nat) (P: PROP) :
   Plain P →
   ⊢ (|={⊤, ⊤}_k=> P) -∗
@@ -258,7 +258,7 @@ Proof using HAff.
     iNext. iNext. by iMod "H".
 Qed.
 
-Lemma step_fupdN_innerN_plain `{BP: BiPlainly PROP} `{@BiFUpdPlainly PROP H BP}
+Lemma step_fupdN_innerN_plain `{BP: !BiPlainly PROP} `{!BiFUpdPlainly PROP}
       (k n: nat) (P: PROP) :
   Plain P →
   ⊢ (|={⊤}_k=>^n P) -∗
@@ -452,7 +452,7 @@ Proof.
   intros Hinv. iIntros "[Hm Hn]".
   iMod (Hiter with "Hm") as "Hupd". clear Hiter.
   iInduction n as [|n] "IH"; simpl.
-  - iModIntro. done. 
+  - iModIntro. done.
   - rewrite lc_succ. iDestruct "Hn" as "[Hone Hn]".
     iMod "Hupd". iMod (lc_fupd_elim_later with "Hone Hupd") as "> Hupd".
     by iApply ("IH" with "Hn Hupd").

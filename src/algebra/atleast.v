@@ -81,7 +81,7 @@ Proof.
 Qed.
 Lemma atleast_and P Q : ◇_k (P ∧ Q) ⊣⊢ ◇_k P ∧ ◇_k Q.
 Proof. by rewrite /bi_atleast or_and_l. Qed.
-Lemma atleast_sep P Q : ◇_k (P ∗ Q) ⊣⊢ ◇_k P ∗ ◇_k Q.
+Lemma atleast_sep `{!BiFinite PROP} P Q : ◇_k (P ∗ Q) ⊣⊢ ◇_k P ∗ ◇_k Q.
 Proof.
   rewrite /bi_atleast. apply (anti_symm _).
   - apply or_elim; last by auto using sep_mono.
@@ -121,12 +121,12 @@ Lemma atleast_intuitionistically_2 P : □ ◇_k P ⊢ ◇_k □ P.
 Proof. by rewrite /bi_intuitionistically -atleast_persistently atleast_affinely_2. Qed.
 Lemma atleast_intuitionistically_if_2 p P : □?p ◇_k P ⊢ ◇_k □?p P.
 Proof. destruct p; simpl; auto using atleast_intuitionistically_2. Qed.
-Lemma atleast_absorbingly P : ◇_k <absorb> P ⊣⊢ <absorb> ◇_k P.
+Lemma atleast_absorbingly `{!BiFinite PROP} P : ◇_k <absorb> P ⊣⊢ <absorb> ◇_k P.
 Proof using H. by rewrite /bi_absorbingly atleast_sep atleast_True. Qed.
 
-Lemma atleast_frame_l P Q : P ∗ ◇_k Q ⊢ ◇_k (P ∗ Q).
+Lemma atleast_frame_l `{!BiFinite PROP} P Q : P ∗ ◇_k Q ⊢ ◇_k (P ∗ Q).
 Proof. by rewrite {1}(atleast_intro P) atleast_sep. Qed.
-Lemma atleast_frame_r P Q : ◇_k P ∗ Q ⊢ ◇_k (P ∗ Q).
+Lemma atleast_frame_r `{!BiFinite PROP} P Q : ◇_k P ∗ Q ⊢ ◇_k (P ∗ Q).
 Proof. by rewrite {1}(atleast_intro Q) atleast_sep. Qed.
 
 Lemma later_affinely_1 `{!AbsolutelyTimeless (PROP:=PROP) emp} P : ▷^k <affine> P ⊢ ◇_k <affine> ▷^k P.
@@ -160,7 +160,7 @@ Proof. intros ???; rewrite /AbsolutelyTimeless atleast_and laterN_and; auto. Qed
 Global Instance or_abs_timeless P Q : AbsolutelyTimeless P → AbsolutelyTimeless Q → AbsolutelyTimeless (P ∨ Q).
 Proof. intros ???; rewrite /AbsolutelyTimeless atleast_or laterN_or; auto. Qed.
 
-Global Instance sep_abs_timeless P Q: AbsolutelyTimeless P → AbsolutelyTimeless Q → AbsolutelyTimeless (P ∗ Q).
+Global Instance sep_abs_timeless `{!BiFinite PROP} P Q: AbsolutelyTimeless P → AbsolutelyTimeless Q → AbsolutelyTimeless (P ∗ Q).
 Proof.
   intros ???; rewrite /AbsolutelyTimeless atleast_sep laterN_sep; auto using sep_mono.
 Qed.

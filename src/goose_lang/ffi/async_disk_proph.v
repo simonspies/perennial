@@ -538,7 +538,7 @@ lemmas. *)
       * iIntros "(H1&H2)".
         iSplitL "H2".
         { iApply IHsz.  eauto. }
-        { rewrite ?right_id Z.add_0_l. simpl crash_val. simpl curr_val. eauto. }
+        { rewrite ?right_id Z.add_0_l Nat.add_0_r. simpl crash_val. simpl curr_val. eauto. }
       * by apply init_disk_sz_lookup_ge.
   Qed.
 

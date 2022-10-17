@@ -28,7 +28,7 @@ Lemma async_rel_mono :
     async_rel_raw n1 va1 v1 a →
     va1 ≡{n2}≡ va2 →
     v1 ≡{n2}≡ v2 →
-    n2 ≤ n1 →
+    n2 ⪯ n1 →
     async_rel_raw n2 va2 v2 a.
 Proof. intros ??????? Hrel -> -> => //=. Qed.
 

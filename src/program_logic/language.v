@@ -1,4 +1,4 @@
-From iris.algebra Require Export ofe.
+From iris.algebra Require Export ofe finite_stepindex.
 From iris.prelude Require Import options.
 
 Section language_mixin.

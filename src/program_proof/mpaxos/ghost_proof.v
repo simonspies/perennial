@@ -51,7 +51,7 @@ Definition is_proposal_lb γsys epoch σ : iProp Σ :=
   own γsys.(mp_proposal_gn) {[ epoch := Cinr (◯ML (σ : list (leibnizO (EntryType))))]}.
 
 Notation "lhs ⪯ rhs" := (prefix lhs rhs)
-(at level 20, format "lhs  ⪯  rhs") : stdpp_scope.
+(at level 80, format "lhs  ⪯  rhs") : stdpp_scope.
 
 Definition own_vote_tok γsrv epoch : iProp Σ :=
   own γsrv.(mp_vote_gn) {[ epoch := to_dfrac_agree (DfracOwn 1) ()]}.

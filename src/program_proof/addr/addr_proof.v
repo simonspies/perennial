@@ -687,7 +687,7 @@ Proof.
 Qed.
 
 Theorem gmap_addr_by_block_big_sepM2
-        {PROP: bi} `{BiAffine PROP}
+        {PROP: bi} `{!BiAffine PROP}
         {T1 T2} (m1 : gmap addr T1) (m2: gmap addr T2) (Φ : addr -> T1 -> T2 -> PROP) :
   ( [∗ map] a ↦ v1; v2 ∈ m1; m2, Φ a v1 v2 ) -∗
   ( [∗ map] blkno ↦ offmap1; offmap2 ∈ gmap_addr_by_block m1; gmap_addr_by_block m2,
@@ -711,11 +711,11 @@ Proof.
       eapply gmap_addr_by_block_lookup in Hme. destruct Hme. intuition eauto. }
   }
   rewrite big_sepM_fmap.
-  iApply (big_sepM_mono with "Hm"); intros.
+  iApply (big_sepM_mono with "Hm"); intros k x Hmap.
   iIntros "Hm".
   iFrame.
   iPureIntro; intros.
-  apply map_lookup_zip_with_Some in H0 as (m1_ & m2_ & -> & Hlookup1 & Hlookup2).
+  apply map_lookup_zip_with_Some in Hmap as (m1_ & m2_ & -> & Hlookup1 & Hlookup2).
   simpl.
   apply (f_equal (λ x, x ≫= lookup k0)) in Hlookup1.
   rewrite lookup_gmap_curry in Hlookup1.

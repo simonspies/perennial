@@ -243,7 +243,7 @@ Qed.
 (* Invariants *)
 Lemma dist_later_vec_to_list {A: ofe} {m} n (l1 l2 : vec A m):
   dist_later n l1 l2 ↔ dist_later n (vec_to_list l1) (vec_to_list l2).
-Proof. destruct n => //=. Qed.
+Proof. split; intros Hlt; split; intros k Hk; destruct Hlt as [Hlt]; specialize (Hlt k Hk); done. Qed.
 Local Instance invariant_unfold_contractive' m sch : Contractive (@invariant_unfold Σ m sch).
 Proof.
   intros n l1 l2 Hd.
@@ -260,9 +260,9 @@ Proof.
   - destruct l2'; first by (simpl in Hlen; congruence).
     apply to_agree_ne => //=.
     apply pair_ne; last done. econstructor.
-    { destruct n; eauto. apply Next_contractive. inversion Hd; subst; eauto => //=. }
+    { apply Next_contractive. split. intros k Hk. destruct Hd as [Hd]. specialize (Hd k Hk). inversion Hd; subst; eauto => //=. }
     efeed pose proof (IHl1' l2') as Hagree; eauto.
-    { destruct n; eauto. inversion Hd; subst; eauto. }
+    { split. intros k Hk. destruct Hd as [Hd]. specialize (Hd k Hk). inversion Hd; subst; eauto => //=. }
     apply to_agree_injN in Hagree. eapply Hagree.
 Qed.
 Global Instance ownI_contractive n lvl i sch : Contractive (@ownI Σ _ n lvl i sch).

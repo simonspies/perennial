@@ -184,7 +184,7 @@ Proof.
     iFrame. by iApply fupd2_mask_subseteq. }
   simpl.
   iIntros (Hsteps) "Hσ He [Hlc1 Hlc2]". inversion_clear Hsteps as [|?? [t1' σ1']].
-  rewrite -(assoc_L (++)) (comm_L Nat.add) Nat.iter_add.
+  rewrite -(assoc_L (++)) (Nat.add_comm) Nat.iter_add.
   iMod (stwpnodes_step with "Hσ He Hlc2") as "H"; first eauto; simplify_eq.
   iModIntro. iApply step_fupd2N_S_fupd2. iApply (step_fupd2N_wand with "H").
   iIntros ">(Hσ & He)". iMod (IH with "Hσ He Hlc1") as "IH"; first done. iModIntro.

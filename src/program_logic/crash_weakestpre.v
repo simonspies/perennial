@@ -310,9 +310,9 @@ Proof.
   { simpl in IHk. by rewrite IHk. }
   f_equiv. f_contractive.
   do 12 f_equiv.
-  rewrite IH; [done|try lia| |].
-  - intros v. eapply dist_S, HΦ; eauto.
-  - eapply dist_le; eauto.
+  rewrite IH; [done|simpl in *; try lia| |].
+  - intros v. eapply ofe.dist_le; first eapply HΦ; eauto.
+  - eapply ofe.dist_le; eauto.
 Qed.
 
 Global Instance wpc_ne s E1 e n :

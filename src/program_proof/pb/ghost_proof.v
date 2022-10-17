@@ -34,7 +34,7 @@ Definition log_po (lhs rhs:Log) : Prop :=
   prefix lhs rhs.
 
 Notation "lhs ⪯ rhs" := (log_po lhs rhs)
-(at level 20, format "lhs ⪯ rhs") : stdpp_scope.
+(at level 80, format "lhs ⪯ rhs") : stdpp_scope.
 
 Section definitions.
 

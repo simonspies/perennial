@@ -1,5 +1,5 @@
 From Coq.QArith Require Import Qcanon.
-From iris.algebra Require Export view gmap frac dfrac gset.
+From iris.algebra Require Export view gmap frac dfrac gset finite_stepindex.
 From iris.algebra Require Import local_updates proofmode_classes big_op.
 From iris.prelude Require Import options.
 
@@ -38,7 +38,7 @@ Record gmap_val_rel (VA: ofe) (V : ofe) (A : Type) := GValRel {
     gval_rel_holds n1 va1 v1 a →
     va1 ≡{n2}≡ va2 →
     v1 ≡{n2}≡ v2 →
-    n2 ≤ n1 →
+    n2 ⪯ n1 →
     gval_rel_holds n2 va2 v2 a;
 }.
 
@@ -62,7 +62,7 @@ Section rel.
     gmap_rel_view_rel_raw n1 m1 f1 →
     m1 ≡{n2}≡ m2 →
     f2 ≼{n2} f1 →
-    n2 ≤ n1 →
+    n2 ⪯ n1 →
     gmap_rel_view_rel_raw n2 m2 f2.
   Proof.
     intros Hrel Hm Hf Hn k [q [v aset]] Hk.

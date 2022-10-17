@@ -151,7 +151,7 @@ Proof.
   iIntros "HNC Hlc".
   iMod (fupd2_mask_subseteq ⊤ (⊤ ∖ D)) as "Hclo"; try set_solver+.
   iMod ("H" $! _ _ _ _ _ [] with "[$] [$] [$] [$]") as "H".
-  simpl. iModIntro. rewrite [_ + 1]comm. iApply (step_fupd2N_wand with "H").
+  simpl. iModIntro. rewrite Nat.add_comm. iApply (step_fupd2N_wand with "H").
   iNext. iIntros "(%Hred&Hclo')". eauto.
 Qed.
 

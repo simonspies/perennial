@@ -1,5 +1,6 @@
 From iris.proofmode Require Export tactics.
 From iris.proofmode Require Import reduction coq_tactics intro_patterns.
+From iris.algebra Require Import finite_stepindex.
 
 
 Tactic Notation "iApply" open_constr(lem) "in" constr(i) :=
@@ -117,7 +118,7 @@ Ltac iSplitDelay :=
 
 Module tests.
   Section bi.
-    Context {PROP: bi} `{BiAffine PROP}.
+    Context {PROP: bi} `{!BiAffine PROP}.
     Set Default Proof Using "All".
     Implicit Types (P Q: PROP) (Φ: nat → PROP).
 

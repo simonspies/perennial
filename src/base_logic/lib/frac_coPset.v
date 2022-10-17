@@ -6,7 +6,7 @@ From Perennial.base_logic Require Export lib.own.
 From iris.proofmode Require Import tactics.
 
 Record frac_coPset :=
-  { fc_carrier :> @discrete_fun positive (fun _ => optionO fracR) }.
+  { fc_carrier :> @discrete_fun _ positive (fun _ => optionO fracR) }.
 
 Section ofe.
   Global Instance frac_coPset_equiv : Equiv (frac_coPset) := λ f g, (fc_carrier f) ≡ (fc_carrier g).
@@ -20,7 +20,7 @@ Section ofe.
       + by intros f x.
       + by intros f g ? x.
       + intros [f] [g] [h] ?? x. trans (g x); eauto.
-    - by intros n f g ? x; apply dist_S.
+    - by intros n f g ? x ?; eapply dist_le.
   Qed.
   Canonical Structure frac_coPsetO := Ofe (frac_coPset) frac_coPset_ofe_mixin.
   Global Instance frac_coPset_ofe_discrete :

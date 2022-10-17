@@ -1,4 +1,4 @@
-From iris.algebra Require Import gmap.
+From iris.algebra Require Import gmap finite_stepindex.
 From iris.proofmode Require Import tactics.
 From iris.bi.lib Require Import fractional.
 From Perennial.base_logic.lib Require Import iprop.
@@ -10,7 +10,7 @@ Section bi.
 
   Implicit Types (P:PROP) (Φ: Qp → PROP) (q: Qp).
 
-  Theorem fractional_weaken Φ `{fractional.Fractional _ Φ} q1 q2 :
+  Theorem fractional_weaken Φ `{!fractional.Fractional Φ} q1 q2 :
     (q1 ≤ q2)%Qp ->
     Φ q2 -∗ Φ q1.
   Proof.

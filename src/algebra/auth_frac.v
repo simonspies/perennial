@@ -1,4 +1,4 @@
-From iris.algebra Require Import auth updates local_updates.
+From iris.algebra Require Import auth updates local_updates finite_stepindex.
 From iris.proofmode Require Import tactics.
 From iris.bi.lib Require Import fractional.
 From iris.prelude Require Import options.

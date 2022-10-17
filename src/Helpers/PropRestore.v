@@ -79,7 +79,7 @@ Section bi.
     rewrite right_id //.
   Qed.
 
-  Global Instance restore_IntoSep_persistent_1 R P P1 P2 Q `{BiAffine PROP} :
+  Global Instance restore_IntoSep_persistent_1 R P P1 P2 Q `{!BiAffine PROP} :
     IntoSep P P1 P2 →
     FromSep P P1 P2 →
     (* NOTE: need Persistent to be later so resolving IntoSep resolves P1
@@ -117,7 +117,7 @@ Section bi.
     IsExistential (Restore R P Q).
   Proof. Qed.
 
-  Global Instance restore_finish_Persistent R P Q `{!Persistent P} `{BiAffine PROP} :
+  Global Instance restore_finish_Persistent R P Q `{!Persistent P} `{!BiAffine PROP} :
     IntoSep (Restore R P Q) P (Restore R emp Q).
   Proof.
     unseal.
@@ -183,7 +183,7 @@ or other Restorables *)
 
 Section tests.
   Context {PROP:bi}.
-  Context `{BiAffine PROP}.
+  Context `{!BiAffine PROP}.
   Implicit Types (P Q R:PROP).
 
   Definition all3 P1 P2 P3: PROP :=

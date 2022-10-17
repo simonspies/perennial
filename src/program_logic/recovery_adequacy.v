@@ -330,8 +330,8 @@ Proof.
     iIntros "Hlc".
     iSpecialize ("H" with "[Hlc]").
     { simpl. rewrite Nat.add_0_r. iExactEq "Hlc". f_equal.
-      rewrite -assoc. f_equal.
-      rewrite ![_ + 1]comm. f_equal.
+      rewrite -Nat.add_assoc. f_equal.
+      rewrite ![_ + 1]Nat.add_comm. f_equal.
       rewrite -Nat.iter_succ Nat.iter_succ_r.
       rewrite Nat.iter_add Nat.iter_succ_r. done. }
     simpl. iMod "H".
@@ -340,7 +340,7 @@ Proof.
     iIntros "H".
     rewrite Nat.add_0_r.
     rewrite -Nat.iter_succ Nat.iter_succ_r.
-    rewrite ![_ + 1]comm. simpl.
+    rewrite ![_ + 1]Nat.add_comm. simpl.
     rewrite Nat.iter_add Nat.iter_succ_r.
     eauto.
 Qed.
@@ -415,7 +415,7 @@ Proof.
     rewrite steps_sum_S_r.
     simpl. rewrite Nat.add_0_r.
     iMod ("H" with "[Hlc]") as "H".
-    { iExactEq "Hlc". f_equal. lia. } 
+    { iExactEq "Hlc". f_equal. lia. }
     iModIntro.
     iApply (step_fupd2N_wand with "H"); auto.
 Qed.
@@ -449,7 +449,7 @@ Proof.
     iMod "H". iMod ("H" with "Hlc") as "H". iModIntro.
     rewrite fresh_later_count_nil.
     replace (0 + S k) with (k + 1) by lia.
-    rewrite -!assoc -step_fupd2N_add.
+    rewrite -!Nat.add_assoc -step_fupd2N_add.
     iApply (step_fupd2N_wand with "H"). iIntros "H".
     rewrite -step_fupd2N_add.
     iMod "H". iApply (fupd2_mask_intro); [done..|]. iIntros "_".
@@ -461,7 +461,7 @@ Proof.
     iEval (rewrite !lc_split -assoc) in "Hlc".
     iDestruct "Hlc" as "[[[Hlc1 _] Hlc2] Hlck]".
     iMod ("H" with "Hlc1") as "H". iModIntro.
-    rewrite -!assoc -step_fupd2N_add.
+    rewrite -!Nat.add_assoc -step_fupd2N_add.
     iApply (step_fupd2N_wand with "H"). iIntros "H".
     iApply step_fupd2_fupd2N; first lia.
     do 2 iMod "H". iModIntro.
@@ -472,7 +472,7 @@ Proof.
     iMod "H" as (HG') "H".
     iMod ("IH" $! HG' with "H [Hlc2 Hlck]") as "H".
     { iEval rewrite !lc_split. by iFrame. }
-    do 3 iModIntro. rewrite assoc. done.
+    do 3 iModIntro. rewrite Nat.add_assoc. done.
 Qed.
 
 Lemma step_fupdN_fresh_soundness {Λ Σ} `{!invGpreS Σ} `{!crashGpreS Σ} (φ : Prop) ns ncurr k k2 f g:
@@ -609,6 +609,6 @@ Proof.
   iApply (step_fupdN_fresh_wand with "H"); first done.
   iIntros (?). iIntros "H Hlc".
   iApply "H". iExactEq "Hlc". f_equiv; first done.
-  rewrite assoc. f_equiv. done.
+  rewrite Nat.add_assoc. f_equiv. done.
  }
 Qed.
